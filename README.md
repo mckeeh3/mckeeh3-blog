@@ -1,6 +1,10 @@
 # mckeeh3 blog Next.js app
 
 This app was initially created following 3-part YouTube tutorial -
+How To Build A Blog With Next.js And Tailwind:
+[Part 1](https://www.youtube.com/watch?v=vu9gPcPs3mY&ab_channel=HarryWolff)
+, [Part 2](https://www.youtube.com/watch?v=hN9oO7M1LBQ&ab_channel=HarryWolff)
+, [Part 3](https://www.youtube.com/watch?v=gQIv-biWxjo&ab_channel=HarryWolff)
 
 ## Next.js generated
 
