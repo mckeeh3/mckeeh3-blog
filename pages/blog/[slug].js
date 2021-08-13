@@ -1,5 +1,7 @@
 import Head from 'next/head';
 import { format, parseISO } from 'date-fns';
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXRemote } from 'next-mdx-remote';
 import { getAllPosts } from '../lib/data';
 
 export default function BlogPage({ title, date, content }) {
@@ -16,7 +18,9 @@ export default function BlogPage({ title, date, content }) {
           <h2 className='text-3xl font-bold'>{title}</h2>
           <div className='text-gray-600 text-xs'>{format(parseISO(date), 'MMMM d, yyyy')}</div>
         </div>
-        <div>{content}</div>
+        <div className='prose'>
+          <MDXRemote {...content} />
+        </div>
       </main>
     </div>
   );
@@ -25,11 +29,13 @@ export default function BlogPage({ title, date, content }) {
 export async function getStaticProps(context) {
   const posts = getAllPosts();
   const post = posts.find((p) => p.slug === context.params.slug);
+  const mdxSource = await serialize(post.content);
   return {
     props: {
       title: post.data.title,
       date: post.data.date.toISOString(),
-      content: post.content,
+      // content: post.content,
+      content: mdxSource,
     },
   };
 }

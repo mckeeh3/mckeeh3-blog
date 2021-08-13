@@ -23,7 +23,6 @@ export default function Home({ posts }) {
 }
 
 function ListBlogItem({ slug, title, date, content }) {
-  console.log('====', new Date(date));
   return (
     <div className='border border-gray-400 shadow hover:shadow-lg rounded-lg hover:border-gray-500 p-4 transition duration-500 ease-in'>
       <div>
