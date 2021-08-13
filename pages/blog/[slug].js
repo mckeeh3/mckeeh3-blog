@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import { blogPosts } from '../lib/data';
+import { format, parseISO } from 'date-fns';
+import { getAllPosts } from '../lib/data';
 
 export default function BlogPage({ title, date, content }) {
   return (
@@ -11,7 +12,10 @@ export default function BlogPage({ title, date, content }) {
       </Head>
 
       <main>
-        <h1>{title}</h1>
+        <div className='border-b-2 border-gray-400 mb-4'>
+          <h2 className='text-3xl font-bold'>{title}</h2>
+          <div className='text-gray-600 text-xs'>{format(parseISO(date), 'MMMM d, yyyy')}</div>
+        </div>
         <div>{content}</div>
       </main>
     </div>
@@ -19,17 +23,22 @@ export default function BlogPage({ title, date, content }) {
 }
 
 export async function getStaticProps(context) {
-  const post = blogPosts.find((p) => p.slug === context.params.slug);
+  const posts = getAllPosts();
+  const post = posts.find((p) => p.slug === context.params.slug);
   return {
-    props: post,
+    props: {
+      title: post.data.title,
+      date: post.data.date.toISOString(),
+      content: post.content,
+    },
   };
 }
 
 export async function getStaticPaths() {
   return {
-    paths: blogPosts.map((path) => ({
+    paths: getAllPosts().map((post) => ({
       params: {
-        slug: path.slug,
+        slug: post.slug,
       },
     })),
     fallback: false,

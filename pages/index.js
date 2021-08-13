@@ -1,8 +1,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { blogPosts } from './lib/data';
+import { format } from 'date-fns';
+import { getAllPosts } from './lib/data';
+import { data } from 'autoprefixer';
 
-export default function Home() {
+export default function Home({ posts }) {
   return (
     <div>
       <Head>
@@ -11,21 +13,40 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main>
-        <h1>mckeeh3 blog - welcome to Hugh McKee&apos;s blog</h1>
-      </main>
-
-      <div>
-        {blogPosts.map((post) => (
-          <div key={post.slug}>
-            <div>
-              <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-            </div>
-            <div>{post.date}</div>
-            <div>{post.content}</div>
-          </div>
+      <div className='space-y-4'>
+        {posts.map((post) => (
+          <ListBlogItem key={post.slug} {...post} />
         ))}
       </div>
     </div>
   );
+}
+
+function ListBlogItem({ slug, title, date, content }) {
+  console.log('====', new Date(date));
+  return (
+    <div className='border border-gray-400 shadow hover:shadow-lg rounded-lg hover:border-gray-500 p-4 transition duration-500 ease-in'>
+      <div>
+        <Link href={`/blog/${slug}`}>
+          <a className='text-lg font-bold'>{title}</a>
+        </Link>
+      </div>
+      <div className='text-gray-600 text-xs'>{format(new Date(date), 'MMM d, yyyy')}</div>
+      <div>{content}</div>
+    </div>
+  );
+}
+
+export async function getStaticProps(context) {
+  const posts = getAllPosts();
+  return {
+    props: {
+      posts: posts.map(({ data, content, slug }) => ({
+        ...data,
+        date: data.date.toISOString(),
+        content,
+        slug,
+      })),
+    },
+  };
 }
