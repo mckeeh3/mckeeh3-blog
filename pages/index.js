@@ -24,7 +24,7 @@ export default function Home({ posts }) {
 
 function ListBlogItem({ slug, title, date, content }) {
   return (
-    <div className='border border-gray-400 shadow hover:shadow-lg rounded-lg hover:border-gray-500 p-4 transition duration-500 ease-in'>
+    <div className='border border-gray-100 shadow hover:shadow-md rounded-lg hover:border-gray-200 p-4 transition duration-200 ease-in'>
       <div>
         <Link href={`/blog/${slug}`}>
           <a className='text-lg font-bold'>{title}</a>

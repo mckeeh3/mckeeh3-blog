@@ -18,7 +18,7 @@ export default function BlogPage({ title, date, content }) {
           <h2 className='text-3xl font-bold'>{title}</h2>
           <div className='text-gray-600 text-xs'>{format(parseISO(date), 'MMMM d, yyyy')}</div>
         </div>
-        <article className='prose'>
+        <article className='prose prose-xl max-w-none'>
           <MDXRemote {...content} />
         </article>
       </main>

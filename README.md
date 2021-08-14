@@ -1,12 +1,25 @@
 # mckeeh3 blog Next.js app
 
+## YouTube tutorial series
+
 This app was initially created following 3-part YouTube tutorial -
 How To Build A Blog With Next.js And Tailwind:
 [Part 1](https://www.youtube.com/watch?v=vu9gPcPs3mY&ab_channel=HarryWolff)
 , [Part 2](https://www.youtube.com/watch?v=hN9oO7M1LBQ&ab_channel=HarryWolff)
-, [Part 3](https://www.youtube.com/watch?v=gQIv-biWxjo&ab_channel=HarryWolff)
+, [Part 3](https://www.youtube.com/watch?v=gQIv-biWxjo&ab_channel=HarryWolff).
 
-## Next.js generated
+## Useful links from tutorial
+
+* [Lorem Ipsum](https://loremipsum.io/)
+* [Tailwind CSS](https://tailwindcss.com/), [Tailwind next.js](https://tailwindcss.com/docs/guides/nextjs)
+* [date-fns](https://date-fns.org/)
+* [Tailwind VSCode extension](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+* [gray-matter](https://www.npmjs.com/package/gray-matter)
+* [markdown-it demo](https://markdown-it.github.io/)
+* [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote)
+* [tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography)
+
+## Next.js generated content
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
