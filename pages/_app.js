@@ -2,6 +2,8 @@ import Link from 'next/link';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
+  // console.log('pageProps', pageProps);
+
   return (
     <div className='mx-auto my-10 w-9/12'>
       <header>

@@ -1,10 +1,36 @@
+import React from 'react';
 import Head from 'next/head';
+import mdxPrism from 'mdx-prism';
+import remarkAutolinkHeadings from 'remark-autolink-headings';
+import remarkSlug from 'remark-slug';
+import remarkCodeTitles from 'remark-code-titles';
 import { format, parseISO } from 'date-fns';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import { getAllPosts } from '../lib/data';
+import WithLineNumbers from '../../components/CodeBlock';
 
 export default function BlogPage({ title, date, content }) {
+  const preToCodeBlock = (preProps) => {
+    if (preProps.children?.props?.mdxType === 'code') {
+      return {
+        ...preProps,
+      };
+    }
+    return undefined;
+  };
+
+  const components = {
+    pre: (preProps) => {
+      const props = preToCodeBlock(preProps);
+      if (props) {
+        return <WithLineNumbers {...props} />;
+      } else {
+        return <pre {...preProps} />;
+      }
+    },
+  };
+
   return (
     <div>
       <Head>
@@ -16,10 +42,10 @@ export default function BlogPage({ title, date, content }) {
       <main>
         <div className='border-b-2 border-gray-400 mb-4'>
           <h2 className='text-3xl font-bold'>{title}</h2>
-          <div className='text-gray-600 text-xs'>{format(parseISO(date), 'MMMM d, yyyy')}</div>
+          <div className='mb-2 text-gray-600 text-xs'>{format(parseISO(date), 'MMMM d, yyyy')}</div>
         </div>
         <article className='prose prose-xl max-w-none'>
-          <MDXRemote {...content} />
+          <MDXRemote {...content} components={components} />
         </article>
       </main>
     </div>
@@ -29,12 +55,17 @@ export default function BlogPage({ title, date, content }) {
 export async function getStaticProps(context) {
   const posts = getAllPosts();
   const post = posts.find((p) => p.slug === context.params.slug);
-  const mdxSource = await serialize(post.content);
+  const mdxSource = await serialize(post.content, {
+    mdxOptions: {
+      remarkPlugins: [remarkAutolinkHeadings, remarkSlug, remarkCodeTitles],
+      rehypePlugins: [mdxPrism],
+    },
+  });
   return {
     props: {
       title: post.data.title,
       date: post.data.date.toISOString(),
-      // content: post.content,
+      excerpt: post.data.excerpt,
       content: mdxSource,
     },
   };
