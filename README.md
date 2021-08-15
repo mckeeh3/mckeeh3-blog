@@ -10,6 +10,10 @@ How To Build A Blog With Next.js And Tailwind:
 
 ## Useful links from tutorial
 
+* [Next.js MDX Remote Example](https://github.com/vercel/next.js/tree/canary/examples/with-mdx-remote)
+* [mdx.js](https://mdxjs.com/)
+* [mdx-js GitHub](https://github.com/mdx-js)
+* [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer)
 * [Lorem Ipsum](https://loremipsum.io/)
 * [Tailwind CSS](https://tailwindcss.com/), [Tailwind next.js](https://tailwindcss.com/docs/guides/nextjs)
 * [date-fns](https://date-fns.org/)

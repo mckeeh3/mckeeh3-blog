@@ -1,7 +1,7 @@
 import React from 'react';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import { Pre, Line, LineNo, LineContent } from './styles';
-import theme from 'prism-react-renderer/themes/nightOwl';
+import theme from 'prism-react-renderer/themes/vsDark';
 
 const codeIn = (children) => {
   if (typeof children === 'string') {
