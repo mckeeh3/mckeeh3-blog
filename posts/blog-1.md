@@ -9,7 +9,7 @@ A line with an `console.log('inline code example');`.
 
 ## Code Sample
 
-```js
+```js:test.js
 export async function getStaticPaths() {
   return {
     paths: getAllPosts().map((post) => ({
